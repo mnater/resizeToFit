@@ -1,0 +1,22 @@
+{
+  "name": "resizetofit",
+  "version": "0.0.1",
+  "description": "JavaScript that resizes font-size until text fits to its container",
+  "main": "resizeToFit.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mnater/resizeToFit.git"
+  },
+  "author": "Mathias Nater",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mnater/resizeToFit/issues"
+  },
+  "homepage": "https://github.com/mnater/resizeToFit#readme",
+  "devDependencies": {
+    "eslint": "^5.14.0"
+  }
+}
