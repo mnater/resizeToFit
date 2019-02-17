@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>rezizeToFit</title>
+        <script src="resizeToFit.js"></script>
+        <script>
+            window.onload = function () {
+                resizeToFit.init([
+                    "#box",
+                    "th",
+                    "td"
+                ]);
+            };
+
+            window.onresize = resizeToFit.resize;
+        </script>
+        <style type="text/css">
+            #box {
+                font-size: 72px;
+                outline: 1px solid black;
+                width: 10%;
+                hyphens: auto;
+                -webkit-hyphens: auto;
+                z-index: 2;
+            }
+            table {
+                table-layout: fixed;
+                width: 33%;
+            }
+            th, td {
+                font-size: 3em;
+                outline: 1px solid black;
+                hyphens: auto;
+                -webkit-hyphens: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box">Kraftfahrzeughaftpflichtversicherung ist das längste Wort im Duden.</div>
+        <table>
+            <tr>
+                <th>erste Kopfzeile</th>
+                <th>zweite Kopfzeile</th>
+                <th>dritte Kopfzeile</th>
+            </tr>
+            <tr>
+                <td>Inhalt des ersten Tabellenfeldes</td>
+                <td>Inhalt des zweiten Tabellenfeldes</td>
+                <td>Inhalt des dritten Tabellenfeldes</td>
+            </tr>
+        </table>
+    </body>
+</html>
