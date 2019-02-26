@@ -1,21 +1,66 @@
 window.resizeToFit = (function makeResizeToFit() {
     "use strict";
     const charges = [];
-    let styleSheet = null;
+    let cssHandler = null;
 
     /**
-     * Adds or replaces a rule.
-     * @param {string} selector - The selector for the rule
-     * @param {string} properties - The properties to be set
-     * @param {number} replaceIdx - The index of the rule this rule replaces
-     * @returns {number} - The new index
+     * Factory for a CSS handling object
+     * @param {CSSStyleSheet} styleSheet - An existing CSSOM styleSheet
      */
-    function setCSS(selector, properties, replaceIdx) {
-        if (replaceIdx) {
-            styleSheet.deleteRule(replaceIdx);
+    function makeCSSHandler(styleSheet) {
+        const sel2Id = new Map();
+
+        /**
+         * Creates or changes a CSS rule.
+         * @param {string} selector - The selector, where the properties are added to
+         * @param {array} properties - Array of properties. e.g. ["color: red", "font-size: 12px"]
+         * @param {boolen} important - True if the rule is !important
+         */
+        function setProp(selector, properties, important) {
+            if (sel2Id.has(selector)) {
+                // Add to existing rule
+                const idx = sel2Id.get(selector);
+                properties.forEach(function eachProp(prop) {
+                    const propNameValue = prop.split(":");
+                    const propName = propNameValue[0].trim();
+                    const propValue = propNameValue[1].trim();
+                    const propImportant = important ? "important" : "";
+                    styleSheet.cssRules.item(idx).style.setProperty(
+                        propName,
+                        propValue,
+                        propImportant
+                    );
+                });
+            } else {
+                // Create new rule
+                let propString = "";
+                properties.forEach(function eachProp(prop) {
+                    propString += prop + "; ";
+                });
+                const idx = styleSheet.insertRule(
+                    selector + "{" + propString + "}",
+                    styleSheet.cssRules.length
+                );
+                sel2Id.set(selector, idx);
+            }
         }
-        const idx = styleSheet.insertRule(selector + "{" + properties + "}", styleSheet.cssRules.length);
-        return idx;
+
+        /**
+         * Delete properties for a specified selector
+         * @param {string} selector - The selector, whose properties are deleted
+         * @param {array} properties - Array of properties. e.g. ["color", "font-size"]
+         */
+        function deleteProp(selector, properties) {
+            const idx = sel2Id.get(selector);
+            properties.forEach(function eachProp(prop) {
+                styleSheet.cssRules.item(idx).style.removeProperty(prop);
+            });
+        }
+
+        return {
+            deleteProp,
+            setProp
+        };
     }
 
     /**
@@ -31,11 +76,11 @@ window.resizeToFit = (function makeResizeToFit() {
         const selector = charge[1];
         const elementClientW = element.clientWidth;
         let fontSize = element.startFontSize;
-        let fontSizeIdx = setCSS(selector, "font-size: " + fontSize + "px");
+        cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
         if (element.scrollWidth > elementClientW) {
             while (element.scrollWidth > elementClientW) {
                 fontSize -= 1;
-                fontSizeIdx = setCSS(selector, "font-size: " + fontSize + "px", fontSizeIdx);
+                cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
             }
         }
     }
@@ -50,7 +95,7 @@ window.resizeToFit = (function makeResizeToFit() {
         const element = charge[0];
         const selector = charge[1];
         const computedStyles = window.getComputedStyle(element);
-        const overflowIdx = setCSS(selector, "overflow: hidden");
+        cssHandler.setProp(selector, ["overflow: hidden", "color: red"]);
         if (!element.startFontSize) {
             element.startFontSize = parseInt(
                 computedStyles.fontSize.slice(0, -2),
@@ -58,7 +103,7 @@ window.resizeToFit = (function makeResizeToFit() {
             );
         }
         interpolateOptimalFontSize(charge);
-        styleSheet.deleteRule(overflowIdx);
+        cssHandler.deleteProp(selector, ["overflow", "color"]);
     }
 
     /**
@@ -80,8 +125,7 @@ window.resizeToFit = (function makeResizeToFit() {
         styleEl.id = "resizeToFit_Styles";
         styleEl.type = "text/css";
         document.head.appendChild(styleEl);
-        styleSheet = styleEl.sheet;
-
+        cssHandler = makeCSSHandler(styleEl.sheet);
         selectors.forEach(function eachSelector(selector) {
             const nodeList = document.querySelectorAll(selector);
             nodeList.forEach(function eachElement(element) {

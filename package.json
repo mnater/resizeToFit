@@ -66,6 +66,7 @@
         1,
         {
           "ignoreStrings": true,
+          "ignoreComments": true,
           "ignoreTemplateLiterals": true
         }
       ],
@@ -112,6 +113,10 @@
       "function-paren-newline": [
         1,
         "consistent"
+      ],
+      "multiline-ternary": [
+        "error",
+        "always-multiline"
       ],
       "no-ternary": 0,
       "no-nested-ternary": 0,
