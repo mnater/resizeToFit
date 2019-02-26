@@ -1,0 +1,948 @@
+<!DOCTYPE HTML>
+<html lang="de">
+
+<head>
+    <title>Heiniger Lehrlingsberatung | Lernende finden</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+    <style>
+* {
+    margin : 0;
+    padding : 0;
+    }
+
+html {
+    margin : 0;
+    padding : 0;
+    height : 100%;
+    width : 100%;
+    }
+
+body {
+    margin : 0;
+    padding : 0;
+    border : 0;
+    width : 100%;
+    min-height : 100%;
+    position: relative;
+    background : #f7f4f1;
+    font-family : Rubik, sans-serif;
+    font-weight : 300;
+    font-size : 1.1rem;
+    letter-spacing : 0.02rem;
+    color : black;
+    }
+
+.wrapper {
+    position : relative;
+    min-height : 100%;
+    flex-grow : 1;
+    flex-shrink : 1;
+    flex-basis : auto;
+    }
+
+
+.hyphenate {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+.donthyphenate {
+    hyphens: none;
+    -webkit-hyphens: none;
+}
+
+
+
+/* CONTENT ||||||||||||||||||||||||||||||||||||||*/
+
+section {
+    position : relative;
+    margin : 100px auto 100px auto;
+    padding : 0 5%;
+    width : 700px;
+    max-width : 90%;
+    }
+
+/* TEXT */
+
+
+section h1 {
+    margin-bottom : 2rem;
+    font-size : 3rem;
+    font-weight : 500;
+    text-align : left;
+    color : #333;
+    }
+
+section h1[data-fit-text],
+section h1 span[data-fit-text] {
+    display: inline-block;
+    max-height: 1em;
+    }
+
+section h1 img.icon {
+    margin-top : 0;
+    margin-right : 15px;
+    padding-bottom : 35px;
+    width : 60px;
+    height : 60px;
+    float : left;
+    }
+
+#finden section h1 img.icon {
+    padding-bottom : 0;
+    }
+
+section h1:after {
+    content : "";
+    visibility : hidden;
+    display : block;
+    font-size : 0;
+    clear : both;
+    height : 0;
+    }
+
+section h2 {
+    font-size : 1.5rem;
+    padding-top : 2rem;
+    padding-bottom : 0.6rem;
+    }
+
+section h3 {
+    padding-top : 2rem;
+    padding-bottom : 0.6rem;
+    font-weight : 400;
+    }
+
+section h4 {
+    padding-top : 1rem;
+    font-weight : 500;
+    }
+
+section p {
+    padding : 0.3em 0;
+    line-height : 1.35;
+    }
+
+section p strong {
+    font-weight : 500;
+    }
+
+section p small {
+    display : block;
+    font-size : 0.75em;
+    }
+
+section a {
+    color : #2c8cc8;
+    text-decoration : none;
+    font-weight : 500;
+    -webkit-transition : all 0.1s ease;
+       -moz-transition : all 0.1s ease;
+         -o-transition : all 0.1s ease;
+            transition : all 0.1s ease;
+    }
+
+section a:hover {
+    color : #82b7df;
+    }
+
+section ul {
+    padding : 0.3em 0;
+    }
+
+section ul {
+    margin-left : 10px;
+    list-style-type : none;
+    }
+
+section ul li {
+    padding : 0.3em 0;
+    list-style-type : none;
+    }
+
+section li::before {
+    content : '· ';
+    margin-left : -10px;
+    }
+
+section section ul.linkliste li {
+    list-style-type : none;
+    }
+
+section img {
+    margin : 0.5em 0;
+    max-width : 100%;
+    }
+
+hr {
+    height:0;
+    border:0;
+    border-bottom: #999 solid 1px;
+    }
+
+em {
+    display : inline-block;
+    margin-bottom : 25px;
+    font-family : BPmono, "Trebuchet MS", serif;
+    font-size : 1.4rem;
+    color : #20638e;
+    letter-spacing : -0.01rem;
+    }
+
+section img {
+    max-width : 100%;
+    }
+
+/* Darstellung mit Anti-Aliasing in Internet Explorer */
+img { -ms-interpolation-mode: nearest-neighbor; }
+
+.drop-down {
+    position : relative;
+    margin : 25px auto;
+    }
+
+.drop-down h2 {
+    display : flex;
+    align-items : center;
+    margin : 20px 66px 20px 0;
+    padding : 0 0 0 25px;
+    height : 60px;
+    background : #2c8cc8;
+    border-radius : 60px;
+    text-transform : uppercase;
+    color : white;
+    font-size : 1.2rem;
+    letter-spacing : 0.1rem;
+    vertical-align : middle;
+    cursor : pointer;
+    -webkit-transition : all 0.3s ease;
+       -moz-transition : all 0.3s ease;
+         -o-transition : all 0.3s ease;
+            transition : all 0.3s ease;
+    }
+
+.drop-down h2:hover {
+    color : black;
+    }
+
+.drop-down h2:before {
+    content : '';
+    display : block;
+    position : absolute;
+    right : 0;
+    width : 60px;
+    height : 60px;
+    background : white;
+    border-radius : 100px;
+    box-shadow : 0 0 15px rgba(0,0,0,.1);
+    }
+
+.drop-down h2:after {
+    content : '\25BC';
+    display : block;
+    position : absolute;
+    top : 4px;
+    right : 0;
+    width : 60px;
+    line-height : 60px;
+    text-align : center;
+    color : #2c8cc8;
+    font-size : 22px;
+    z-index : 2;
+    -webkit-transform:scale(1.6,1);
+       -moz-transform:scale(1.6,1);
+        -ms-transform:scale(1.6,1);
+         -o-transform:scale(1.6,1);
+            transform:scale(1.6,1);
+    -webkit-transition : all 0.3s ease;
+       -moz-transition : all 0.3s ease;
+         -o-transition : all 0.3s ease;
+            transition : all 0.3s ease;
+    }
+
+.drop-down h2:hover:after {
+    top : 9px;
+    font-size : 24px;
+    }
+
+.drop-down h2.open:after {
+    content : '\25B2';
+    top : 0;
+    }
+
+.drop-down h2.open:hover:after {
+    top : -5px;
+    }
+
+.drop-down h2.rotate:after {
+    top : 0;
+    margin-right : 1px;
+    -webkit-transform:scale(1.6,1) rotate(180deg);
+       -moz-transform:scale(1.6,1) rotate(180deg);
+        -ms-transform:scale(1.6,1) rotate(180deg);
+         -o-transform:scale(1.6,1) rotate(180deg);
+            transform:scale(1.6,1) rotate(180deg);
+    }
+
+.drop-down article {
+    /*display : none;*/
+    margin-top : 25px;
+    margin-bottom : 100px;
+    }
+
+.icons {
+    margin-top : 4rem;
+    }
+
+
+.icons a {
+    width : 50%;
+    display : block;
+    float : left;
+    text-align : center;
+    text-transform : uppercase;
+    letter-spacing : 0.1rem;
+    background-image : url('img/icon.png');
+    background-repeat : no-repeat;
+    background-size : 75% auto;
+    background-position : top center;
+    -webkit-transition : all 0.3s ease;
+       -moz-transition : all 0.3s ease;
+         -o-transition : all 0.3s ease;
+            transition : all 0.3s ease;
+    }
+
+.icons a:hover {
+    color : black;
+    }
+
+.icons img {
+    opacity : 0;
+    width : 75%;
+    margin : 0 0 2rem 0;
+    display : inline-block;
+    -webkit-transition : all 0.3s ease;
+       -moz-transition : all 0.3s ease;
+         -o-transition : all 0.3s ease;
+            transition : all 0.3s ease;
+    }
+
+.icons img:hover {
+    opacity : 1;
+    }
+
+.icons:after {
+    content : "";
+    visibility : hidden;
+    display : block;
+    font-size : 0;
+    clear : both;
+    height : 0;
+    }
+
+
+
+.kennenlernpaket table {
+    margin : 25px 0;
+    border-radius : 15px;
+    border : 0;
+    overflow : hidden;
+    border-collapse : collapse;
+    border-style : hidden;
+    }
+
+.kennenlernpaket table th {
+    padding : 15px;
+    color : white;
+    background : #2c8cc8;
+    font-weight : 500;
+    text-transform : uppercase;
+    letter-spacing : 0.1rem;
+    }
+
+.kennenlernpaket table td {
+    padding : 25px;
+    vertical-align : top;
+    background : white;
+    }
+
+.kennenlernpaket table th, td {
+    border : 3px solid #f7f4f1;
+    width : 50%;
+    }
+
+@media screen and (max-width: 360px){
+
+    .kennenlernpaket table {
+    font-size : 0.8em;
+    }
+
+}
+
+
+
+
+
+#finden table {
+    width : 100%;
+    margin : 25px 0;
+    border-radius : 100px;
+    border-collapse : collapse;
+    border-spacing : 0;
+    overflow : hidden;
+    }
+
+#finden table thead th {
+    position : relative;
+    padding : 50px 0;
+    color : white;
+    background : #2c8cc8;
+    text-transform : uppercase;
+    letter-spacing : 0.1rem;
+    text-align : center;
+    }
+
+#finden table thead th strong {
+    display : block;
+    position : absolute;
+    bottom : 0;
+    left : 50%;
+    transform : translate(-50%, 50%);
+    width : 70px;
+    height : 70px;
+    line-height : 70px;
+    background : #f7f4f1;
+    color : #2c8cc8;
+    font-weight : 600;
+    font-size : 2.5rem;
+    border-radius : 500px;
+    }
+
+#finden table tbody td {
+    padding : 70px 15px 10px 15px;
+    background : white;
+    }
+
+#finden table tbody td > div {
+    display : table;
+    }
+
+#finden table tbody td > div > ul, #finden table tbody td > div > div {
+    display : table-cell;
+    padding : 0 20px;
+    width : 50%;
+    }
+
+#finden table tbody td > div > div > ul {
+    display : block;
+    }
+
+#finden table th, #finden table td {
+    border : 0;
+    width : 33.333%;
+    }
+
+#finden table tfoot td {
+    padding : 30px 0 70px 0;
+    text-align : center;
+    background : white;
+    }
+
+#finden table tfoot td strong {
+    display : block;
+    margin-top : 10px;
+    color : #2c8cc8;
+    font-weight : 500;
+    font-size : 1.8rem;
+    letter-spacing : 0.1rem;
+    }
+
+#finden table tfoot td strong small {
+    display : block;
+    font-size : 0.6em;
+    font-weight : 600;
+    }
+
+#finden table thead th:nth-child(1) {
+    background : #6fbef6;
+    }
+
+#finden table thead th:nth-child(1)  strong, #finden table tfoot td:nth-child(1) strong {
+    color : #6fbef6;
+    }
+
+#finden table thead th:nth-child(3) {
+    background : #20638e;
+    }
+
+#finden table thead th:nth-child(3)  strong, #finden table tfoot td:nth-child(3) strong {
+    color : #20638e;
+    }
+
+@media screen and (max-width: 360px){
+
+    #finden table {
+    font-size : 0.8em;
+    }
+
+    #finden table tfoot td {
+    padding-bottom : 60px;
+    }
+
+    #finden table tfoot td strong {
+    font-size : 1.5em;
+    }
+
+    #finden table tbody td {
+    padding : 70px 0 10px 0;
+    }
+
+}
+
+
+
+.portrait {
+    margin-bottom : 1rem;
+    width : 100%;
+    padding-top : 67%;
+    background-image : url('img/portrait_peter-heiniger_quer.jpg');
+    background-size : cover;
+    background-position : center center;
+    }
+
+@media (orientation: portrait) and (max-width: 800px) {
+
+    .portrait {
+    padding-top : 150%;
+    background-image : url('img/portrait_peter-heiniger_hoch.jpg');
+    }
+}
+
+
+
+.partner {
+    text-align : justify;
+    }
+
+.partner a {
+    display : inline-block;
+    margin-top : 25px;
+    text-align : center;
+    font-weight : 400;
+    color : black;
+    }
+
+.partner a img {
+    width : 100px;
+    }
+
+.partner a small {
+    display : block;
+    }
+
+.partner:after {
+  content : "";
+  display : inline-block;
+  width : 100%;
+}
+
+
+ul.kontakt {
+    margin : 0;
+    padding-left : 0;
+    font-size : 1.5rem;
+    vertical-align : middle;
+    }
+
+ul.kontakt li {
+    position : relative;
+    margin : 2rem 0;
+    }
+
+ul.kontakt li strong{
+    margin-left : 75px;
+    vertical-align : middle;
+    }
+
+ul.kontakt li strong img {
+    margin : 0;
+    max-width : 80%;
+    vertical-align : middle;
+    }
+
+ul.kontakt li:before {
+    content : '?';
+    display : block;
+    position : absolute;
+    top : -5px;
+    left : 10px;
+    width : 60px;
+    line-height : 60px;
+    color : white;
+    text-align : center;
+    vertical-align : middle;
+    background : #2c8cc8;
+    border-radius : 100px;
+    }
+    </style>
+
+    <script src="../resizeToFit.js"></script>
+    <script>
+        window.onload = function() {
+            resizeToFit.init([
+                "h1"/*,
+                "h2",
+                "td"*/
+            ]);
+        }
+    </script>
+</head>
+
+<body id="finden">
+    <div class="wrapper">
+        <section class="hyphenate">
+            <h1 class="donthyphenate"><span>Wortberge überqueren</span></h1>
+            <p><em>Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte.</em></p>
+            <p>Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik. Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg.</p>
+
+        </section>
+
+        <section class="hyphenate">
+            <h1 class="donthyphenate">Konsonantienprodukte</h1>
+
+            <p><em>Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte.</em></p>
+            <p>Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik. Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg.</p>
+
+            <div class="drop-down" name="basispaket">
+
+                <h2>Vokalienmarketing-Basispaket</h2>
+                <article>
+                        <p><em>Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte.</em></p>
+                        <p>Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien. Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. Nicht einmal von der allmächtigen Interpunktion werden die Blindtexte beherrscht – ein geradezu unorthographisches Leben. Eines Tages aber beschloß eine kleine Zeile Blindtext, ihr Name war Lorem Ipsum, hinaus zu gehen in die weite Grammatik. Der große Oxmox riet ihr davon ab, da es dort wimmele von bösen Kommata, wilden Fragezeichen und hinterhältigen Semikoli, doch das Blindtextchen ließ sich nicht beirren. Es packte seine sieben Versalien, schob sich sein Initial in den Gürtel und machte sich auf den Weg.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>S</strong>
+                                    <p>1 Lehrberuf<br />plus KV-Beruf</p>
+                                </th>
+                                <th>
+                                    <strong>M</strong>
+                                    <p>2 bis 3 Lehrberufe<br />&nbsp;</p>
+                                </th>
+                                <th>
+                                    <strong>L</strong>
+                                    <p>3 bis 4 Lehrberufe<br />&nbsp;</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    <div>
+                                        <div>
+
+                                            <h4>Autonome Lehrlings-Website für Lehrstellensuchende</h4>
+                                            <ul>
+                                                <li>Für Zielgruppe "Lehrstellensuchende" vorprogrammiert</li>
+                                                <li>Integration Firmenfarben- und Logo</li>
+                                                <li>Mit Chat-Integration</li>
+                                                <li>Lehrbetriebfotos</li>
+                                                <li>Individuell angepasster Text</li>
+                                            </ul>
+
+                                            <h4>12 Monate Hosting und Services</h4>
+
+                                            <h4>Professionelle Fotos</h4>
+                                            <ul>
+                                                <li>Fotos Ihrer Lernenden und Betreuer im Einsatz, vom Schweizer Profifotografen, in Ihrem Betrieb</li>
+                                            </ul>
+
+                                        </div>
+                                        <div>
+
+                                            <h4>Einrichten von Google AdWords-Kampagnen</h4>
+                                            <ul>
+                                                <li>Suchmaschinenwerbung gemäss Ihrer Vorgaben bzgl. Suchbegriffen, Zielregion und Anzeigen-Wording. Inkl. 12 Monate Agenturbetreuung.</li>
+                                            </ul>
+
+                                            <h4>Übertrag der relevanten Inhalte auf einen separaten, unternehmenseigenen Facebook-Lehrlings-Account</h4>
+
+                                            <h4>Fachmännische Agentur-Begleitung</h4>
+                                            <ul>
+                                                <li>Initiales Beratungsgespräch mit Abstimmung Ihrer Ziele und Erwartungen</li>
+                                                <li>Persönliche Betreuung während der gesamten Projektdauer</li>
+                                                <li>Abschliessende Einführung in die neue Umgebung, auf Wunsch mit Schulung</li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <p>2 Seiten Text<br/>(300 Worte)</p>
+                                    <p>5 Fotos</p>
+                                    <strong><small>CHF</small>9'990.–</strong>
+                                </td>
+                                <td>
+                                    <p>4 Seiten Text<br/>(500 Worte)</p>
+                                    <p>8 Fotos</p>
+                                    <strong><small>CHF</small>11'490.–</strong>
+                                </td>
+                                <td>
+                                    <p>6 Seiten Text<br/>(700 Worte)</p>
+                                    <p>12 Fotos</p>
+                                    <strong><small>CHF</small>13'490.–</strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <h3>Ihre Vorteile:</h3>
+
+                    <ul>
+                        <li>Die Lehrlings-Website ist 100% Zielgruppenorientiert</li>
+                        <li>Mit Google AdWords wird Ihre Lehrlingswebsite garantiert gefunden</li>
+                        <li>Projektdurchlaufzeit 3 Wochen</li>
+                        <li>Erste Resultate 1 Monat nach der Implementierung</li>
+                        <li>Ein Hersteller für das ganze Paket, eine Ansprechperson</li>
+                    </ul>
+
+                    <h3>Hinweise:</h3>
+
+                    <ul>
+                        <li>Nicht inbegriffen: Monatliche Kosten für Klicks auf die AdWords-Anzeigen (= CPC; Cost-per-Click). Diese sind abhängig von der Suchregion, dem Lehrberuf/den Lehrberufen, der Kampagnendauer, Ihren individuellen Zielen etc.</li>
+                        <li>Selbstverständlich können Sie die im Onlinemarketing Basispaket enthaltenen Produkte auch einzeln erwerben. Für ein entsprechendes Angebot kontaktieren Sie mich bitte.</li>
+                    </ul>
+
+                </article>
+
+            </div>
+
+            <div class="drop-down" name="videos">
+
+                <h2 data-fit-text="20">Lehrbetrieb-Erklärvideos</h2>
+
+                <article>
+
+                    <p><em>Ihr ganzer Lehrbetrieb in einer Minute zeichnerisch visualisiert und erklärt.</em></p>
+
+                    <p>Erklärvideos sind eines der Lieblingskinder von Jugendlichen. Dies vor allem, weil sämtliche wichtige Aspekte einer Website auf eine Minute reduziert und zudem spielerisch und spannend dargestellt werden.</p>
+
+                    <p>Und so funktioniert das Lehrbetrieb-Erklärvideo:  Sämtliche von Ihrem Lehrbetrieb relevanten Punkte werden mit vielen nacheinander folgenden, unmissverständlichen Handzeichnungen, einer sympathischen Stimme und Musik im Hintergrund erklärt. Wissenschaftliche Studien belegen deutlich, dass gerade junge Menschen diese Art von Information bevorzugen und deswegen eher bereit sind, beispielsweise ein Kontaktformular auszufüllen und abzusenden. Das Lehrbetrieb-Erklärvideo ist logisch aufgebaut, teilweise standardisiert und mit genügend Optionen ausgestattet, so dass Ihr Gesamtauftritt individuell wahrgenommen wird. Der Umsetzungsaufwand ist insgesamt sehr gering, mit der erfreulichen Konsequenz, dass sich der marktübliche Preis für Sie um fast die Hälfte reduziert.</p>
+
+                    <p>Direkt installiert auf meiner angebotenen Lehrlings-Website erhöhen sich mit dem Lehrbetrieb-Erklärvideo automatisch die Chancen auf mehr Bewerbungen. Wegen des modernen Auftritts spricht man zudem von Ihrem Unternehmen und Sie profitieren von Mund-zu-Mund Propaganda. Optimal auf Ihrer Unternehmens-Website platziert, ist das Lehrbetrieb-Erklärvideo ebenso eine clevere Alternative zu der Lehrlings-Website.</p>
+
+                    <p>Möchten Sie sich ein Bild machen von den Möglichkeiten der Lehrbetrieb-Erklärvideos? Gerne stehe ich Ihnen für ein unverbindliches, kostenloses Erstgespräch zur Verfügung.</p>
+
+                </article>
+
+            </div>
+
+            <div class="drop-down" name="chatbot">
+
+                <h2 data-fit-text="20">Lehrlings-Chatbot</h2>
+
+                <article>
+
+                    <p><em>Der virtuelle Kontakt-, Antwort- und Dialogroboter.</em></p>
+
+                    <p>Über 80% der 14-18jährigen geben an, chatten gegenüber E-Mails schreiben und telefonieren zu bevorzugen. Stellen Sie sich vor, auf Ihrer auf Lehrstellensuche ausgerichteten Website befindet sich optimal positioniert eine kleine Roboterkarikatur, mit der Möglichkeit gleich unten dran einen Text zu verfassen. Potentielle Lernende können mit ihren Smartphones einen ersten Kontakt herstellen, alle möglichen Fragen stellen und kriegen umgehend Antworten - sogar Dialoge sind möglich. Gegenüber WhatsApp hat der Chatbot die wesentlichen Vorteile, automatisch und ohne Wartezeit zu erwidern, weshalb dieser sich vor allem für Unternehmen mit überdurchschnittlichem Lehrlingsbedarf eignet. Ebenfalls interessant ist, dass sich die fertige Lösung rasch und schmerzfrei auf Facebook installieren lässt.</p>
+
+                    <p>Rund drei Viertel aller möglichen Fragen und Unterhaltungen mit dem Thema Lehrstellensuche sind bereits erfasst. Dieses Sammelsurium ist für jeden Betrieb, der Lernende sucht, geeignet. Der einzige Restaufwand, der sich automatisch ergibt, ist, dass wir gemeinsam Fragen, Antworten und Konversationen spezifisch auf Ihre Firma, Branche und Berufe eruieren und hinterlegen müssen. Aufwand und Kosten für ein ganzheitliches Lehrlings-Chatbot-Projekt sinken somit erheblich und eröffnen mittelständischen Unternehmen neue Chancen.</p>
+
+                    <p>Sind Sie ein modernes Unternehmen mit permanent vielen Besuchern auf Ihrer Lernenden-Website und wollen ein wachsendes Grundbedürfnis der heutigen Jugend abdecken, ist der Lehrlings-Chatbot bestimmt ein treffendes Instrument. Detaillierte Informationen erhalten Sie gerne telefonisch oder persönlich, während eines unverbindlichen, kostenlosen Erstgespräches.</p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="hyphenate">
+
+            <h1 class="donthyphenate">Strategisches Lehrlingsmarketing</h1>
+
+                <p><em>Qualität und Kontinuität durch gezieltes, vorausschauendes Beschaffen Ihrer Lernenden.</em></p>
+
+                <p>Das Strategieprojekt mit daraus abgeleiteten Massnahmen für das Lehrlingsmarketing besteht aus drei Hauptpunkten: </p>
+
+            <ul>
+                <li>Als Basis erhalten Sie eine präzise Unternehmens- Markt- sowie Ursachenforschung inklusive Standortbestimmung Ihres ganzheitlichen Lehrlingswesens plus eine SWOT-Analyse. </li>
+                <li>In zweiter Instanz erarbeiten wir gemeinsam im Projektteam Ideen für eine neue Lehrlings-Strategie mit Unterstützung der nun zur Verfügung stehenden Forschungs- und Analysearbeiten. Selbstverständlich können Sie die Erarbeitung der Strategie auch komplett an Heiniger Lehrlingsberatung auslagern.</li>
+                <li>Nach dem Fertiggestalten der definitiven Strategie und den daraus abgeleiteten Marketingmassnahmen kann ich Sie bei der Planung, Implementierung, Kommunikation und dem Controlling unterstützen oder übernehme nach Ihren Rahmenbedingungen die Projektleitung.</li>
+            </ul>
+
+            <div class="drop-down" name="forschung">
+
+                <h2 data-fit-text="20">Unternehmens-, Markt- und Ursachenforschung</h2>
+
+                <article>
+                    <p><em>Damit Sie genau wissen, wo Sie heute stehen und welche Wege zukünftig (nicht) in Frage kommen.</em></p>
+
+                    <p>Aus den Forschungs- und Analysearbeiten gewinnen Sie von neutraler Stelle Erkenntnisse über Ihre ganzheitliche Lehrlings-Historie, von positiven und negativen Aktionen, wo Ihr Lehrbetrieb gut ist, wo Mittelmass und wo vielleicht schlecht. Ebenso bringe ich in Erfahrung, mit welchen Mitteln und Instrumenten die Branche und Ihre direkten Mitbewerber versuchen Gegensteuer zu geben. Am meisten interessieren dürften Sie mögliche Chancen, welche sich aus Ihrer aktuellen Struktur oder vergangenen Marketingaktionen ergeben, oder wie und womit Ihre Lernenden die letzten Jahre zufrieden waren und wo eher unglücklich. Mit dem ehrlichen Papier verfügt Ihr Unternehmen schliesslich über die notwendige Grundlage, um für den Lehrbetrieb die beste Strategie zu erarbeiten. Mehr Informationen entnehmen Sie bitte unten in der Box.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>S</strong>
+                                    <p>4–12<br/>Lernende</p>
+                                </th>
+                                <th>
+                                    <strong>M</strong>
+                                    <p>13–24<br/>Lernende</p>
+                                </th>
+                                <th>
+                                    <strong>L</strong>
+                                    <p>25–40<br/>Lernende</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    <div>
+                                        <ul>
+                                            <li>Abstimmen der Ziele, Erwartungen und Rahmenbedingungen</li>
+                                            <li>Interviews mit Ausbildern, HR-Verantwortlichen, aktiven, ausgeschiedenen und übernommenen Lernenden sowie Eltern, Oberstufenschulen und weiteren Schlüsselpersonen</li>
+                                        </ul>
+                                        <ul>
+                                            <li>Untersuchen und Abbilden des Branchen- und Mitbewerber-Lehrlingsmarketings </li>
+                                            <li>Zusammenfassung bisheriger Marketingmassnahmen</li>
+                                            <li>SWOT-Analyse</li>
+                                            <li>Dokumentation und Präsentation der Resultate und Analysen</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <p>9 Tage</p>
+                                    <strong><small>CHF</small> 8'550.–</strong>
+                                </td>
+                                <td>
+                                    <p>14 Tage</p>
+                                    <strong><small>CHF</small> 13'300.–</strong>
+                                </td>
+                                <td>
+                                    <p>19 Tage</p>
+                                    <strong><small>CHF</small> 18'050.–</strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <h3>Ihre Vorteile:</h3>
+
+                    <ul>
+                        <li>Ehrliche, vollumfängliche Grundlage für Ihre Strategieerarbeitung</li>
+                        <li>Keine Abhängigkeit hinsichtlich Fortführung des Projektes</li>
+                        <li>Geringer zeitlicher und finanzieller Aufwand</li>
+                        <li>Ihre Ressourcen werden minimal beansprucht</li>
+                    </ul>
+
+                </article>
+
+            </div>
+
+            <div class="drop-down" name="strategie">
+
+                <h2 data-fit-text="20">Strategie-Erarbeitung</h2>
+
+                <article>
+
+                    <p><em>Um Kunden zu gewinnen, zu betreuen und zu binden, arbeitet beinahe jede Firma mit einer individuellen Strategie – was kann schlecht daran sein, dasselbe für Lernende zu tun?</em></p>
+
+                    <p>Eine Lehrlings-Strategie soll allgemein als positiv und einzigartig wahrgenommen werden und intern auf eine hohe Akzeptanz stossen, mit dem Ziel, dass darüber gesprochen wird. Als Pflichtaufgabe setze ich auf professionelle, regelmässige Betriebskommunikation, damit ein Grossteil der Mitarbeiter auf freiwilliger Basis mitwirkt und als Unternehmensbotschafter persönlich auf die Suche nach Nachwuchs geht. Als selbstverständlich erachte ich es zudem, dass neue, bestehende und übernommene Lernende wichtiger Teil des Projektteams sind und somit aktiv an den Workshops mitwirken.</p>
+
+                    <p>Natürlich führen viele Wege nach Rom und meine Aspekte scheinen banal. Für eine erfolgreiche Strategiearbeit mit Lernenden im Mittelpunkt sind diese erfahrungsgemäss von grosser Bedeutung und dienen als wichtige Grundlage. Ebenfalls Grundlage ist mein komplettes Ideengut, welches automatisch während der gesamten Projektdauer mit einfliesst. Mehr Detailinformationen erhalten Sie gern in der untenstehenden Box sowie während eines persönlichen Gesprächs.</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>S</strong>
+                                    <p>4–12<br/>Lernende</p>
+                                </th>
+                                <th>
+                                    <strong>M</strong>
+                                    <p>13–24<br/>Lernende</p>
+                                </th>
+                                <th>
+                                    <strong>L</strong>
+                                    <p>25–40<br/>Lernende</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    <div>
+                                        <ul>
+                                            <li>Abstimmen der Ziele, Erwartungen und Rahmenbedingungen und Definieren der Projektgruppe</li>
+                                            <li>Organisation, Moderation und Leitung von zwei Workshops</li>
+                                        </ul>
+                                        <ul>
+                                            <li>Dokumentation und Besprechung der Zwischen- sowie Endresultate</li>
+                                            <li>Dokumentation und Präsentation der definitiven Lehrlings-Marketingstrategie inkl. taktischer Massnahmen</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <p>5 Tage</p>
+                                    <strong><small>CHF</small> 4'750.–</strong>
+                                </td>
+                                <td>
+                                    <p>7 Tage</p>
+                                    <strong><small>CHF</small> 6'650.–</strong>
+                                </td>
+                                <td>
+                                    <p>9 Tage</p>
+                                    <strong><small>CHF</small> 8'550.–</strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <h3>Ihre Vorteile:</h3>
+
+                    <ul>
+                        <li>Ihre Ressourcen werden minimal beansprucht</li>
+                        <li>Kurze Projektdauer - Ihr Tagesgeschäft läuft normal weiter</li>
+                        <li>Sie erhalten umfassendes Fachwissen über die Generation Z und den heutigen Lehrlingsmarkt </li>
+                        <li>Schlankes, zielorientiertes, klar dokumentiertes Projektmanagement</li>
+                    </ul>
+
+                    <h3>Hinweise:</h3>
+
+                    <ul>
+                        <li>Ihre individuelle Strategie kann auch komplett ausgelagert und im Auftrag erarbeiten werden. Nach Aufnahme Ihrer Situation und Ziele erhalten Sie ein faires Pauschalangebot.</li>
+                        <li>Sie befinden sich bereits in der Planung oder haben gar schon ein Projekt lanciert? Kein Problem - gerne stehe ich Ihnen mit meinem Wissen als Projektmitglied zur Verfügung.</li>
+                        <li>Die Fixpreise basieren auf Erfahrungswerten und können je nach Komplexität und Dringlichkeit des Auftrages variieren.</li>
+                    </ul>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</body>
+
+</html>
