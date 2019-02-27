@@ -64,28 +64,15 @@
         </style>
         <script src="../resizeToFit.js"></script>
         <script>
-            function debouncer(func, timeout) {
-                timeout = timeout || 200;
-                var timeoutID;
-                return function () {
-                    var scope = this;
-                    var args = arguments;
-                    clearTimeout(timeoutID);
-                    timeoutID = setTimeout(function () {
-                        func.apply(scope, Array.prototype.slice.call(args));
-                    }, timeout);
-                }
-            }
             window.addEventListener("load", function () {
                 resizeToFit.init([
                     "h1"
                 ]);
             });
             
-            window.addEventListener("resize", debouncer(function () {
-                console.log("resize");
-                resizeToFit.resize();
-            }));
+            window.addEventListener("resize", function () {
+                resizeToFit.resize(100);
+            });
             
         </script>
     </head>

@@ -102,21 +102,38 @@ window.resizeToFit = (function makeResizeToFit() {
         );
         if (!element.originalFontSize) {
             element.originalFontSize = elementCurrentFontSize;
-            console.log("set originalFontSize", element.originalFontSize);
         }
-        cssHandler.setProp(selector, ["overflow: hidden", "color: red"]);
+        cssHandler.setProp(selector, ["overflow: hidden"]);
         interpolateOptimalFontSize(element, selector, elementCurrentFontSize);
         cssHandler.deleteProp(selector, ["overflow"]);
     }
 
+    let debounceID = null;
+
     /**
-     * Resize each element
+     * Resize each element.
+     * The execution is debounced by a given amount of ms.
+     * @param {number} debounce - Waits this amount of ms to resize content.
      */
-    function resize() {
-        resizedSelectors.clear();
-        charges.forEach(function eachCharge(charge) {
-            resizeContent(charge[0], charge[1]);
-        });
+    function resize(debounce) {
+        if (debounce === undefined) {
+            debounce = 200;
+        }
+        /**
+         * Actual resizing
+         */
+        function doResizing() {
+            resizedSelectors.clear();
+            charges.forEach(function eachCharge(charge) {
+                resizeContent(charge[0], charge[1]);
+            });
+        }
+        if (debounce > 0) {
+            window.clearTimeout(debounceID);
+            debounceID = window.setTimeout(doResizing, debounce);
+        } else {
+            doResizing();
+        }
     }
 
     /**
@@ -136,7 +153,7 @@ window.resizeToFit = (function makeResizeToFit() {
                 charges.push([element, selector]);
             });
         });
-        resize();
+        resize(0);
     }
 
     return {
