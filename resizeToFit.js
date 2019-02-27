@@ -2,6 +2,7 @@ window.resizeToFit = (function makeResizeToFit() {
     "use strict";
     const charges = [];
     let cssHandler = null;
+    const resizedSelectors = new Set();
 
     /**
      * Factory for a CSS handling object
@@ -14,9 +15,8 @@ window.resizeToFit = (function makeResizeToFit() {
          * Creates or changes a CSS rule.
          * @param {string} selector - The selector, where the properties are added to
          * @param {array} properties - Array of properties. e.g. ["color: red", "font-size: 12px"]
-         * @param {boolen} important - True if the rule is !important
          */
-        function setProp(selector, properties, important) {
+        function setProp(selector, properties) {
             if (sel2Id.has(selector)) {
                 // Add to existing rule
                 const idx = sel2Id.get(selector);
@@ -24,11 +24,9 @@ window.resizeToFit = (function makeResizeToFit() {
                     const propNameValue = prop.split(":");
                     const propName = propNameValue[0].trim();
                     const propValue = propNameValue[1].trim();
-                    const propImportant = important ? "important" : "";
                     styleSheet.cssRules.item(idx).style.setProperty(
                         propName,
-                        propValue,
-                        propImportant
+                        propValue
                     );
                 });
             } else {
@@ -68,20 +66,25 @@ window.resizeToFit = (function makeResizeToFit() {
      * than the elements client width.
      * Getting element.scrollWidth forces a layout. This is really bad
      * for performance.
-     * @param {array} charge - An array of element and selector
-     * @returns {undefined}
+     * @param {DOMElement} element - An element whose font-size needs to be resized
+     * @param {string} selector - The selector that found that element.
+     * @param {number} currentFontSize - The current fontsize of the element
      */
-    function interpolateOptimalFontSize(charge) {
-        const element = charge[0];
-        const selector = charge[1];
+    function interpolateOptimalFontSize(element, selector, currentFontSize) {
         const elementClientW = element.clientWidth;
-        let fontSize = element.startFontSize;
+        let fontSize = null;
+        if (resizedSelectors.has(selector)) {
+            fontSize = currentFontSize;
+        } else {
+            fontSize = element.originalFontSize;
+        }
         cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
         if (element.scrollWidth > elementClientW) {
             while (element.scrollWidth > elementClientW) {
                 fontSize -= 1;
                 cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
             }
+            resizedSelectors.add(selector);
         }
     }
 
@@ -90,28 +93,29 @@ window.resizeToFit = (function makeResizeToFit() {
      * @param {array} charge - An array of element and selector
      * @returns {undefined}
      */
-    function resizeContent(charge) {
+    function resizeContent(element, selector) {
         // The unit is always "px" for computed values
-        const element = charge[0];
-        const selector = charge[1];
         const computedStyles = window.getComputedStyle(element);
-        cssHandler.setProp(selector, ["overflow: hidden", "color: red"]);
-        if (!element.startFontSize) {
-            element.startFontSize = parseInt(
-                computedStyles.fontSize.slice(0, -2),
-                10
-            );
+        const elementCurrentFontSize = parseInt(
+            computedStyles.fontSize.slice(0, -2),
+            10
+        );
+        if (!element.originalFontSize) {
+            element.originalFontSize = elementCurrentFontSize;
+            console.log("set originalFontSize", element.originalFontSize);
         }
-        interpolateOptimalFontSize(charge);
-        cssHandler.deleteProp(selector, ["overflow", "color"]);
+        cssHandler.setProp(selector, ["overflow: hidden", "color: red"]);
+        interpolateOptimalFontSize(element, selector, elementCurrentFontSize);
+        cssHandler.deleteProp(selector, ["overflow"]);
     }
 
     /**
      * Resize each element
      */
     function resize() {
+        resizedSelectors.clear();
         charges.forEach(function eachCharge(charge) {
-            resizeContent(charge);
+            resizeContent(charge[0], charge[1]);
         });
     }
 
