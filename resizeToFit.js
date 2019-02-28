@@ -72,17 +72,26 @@ window.resizeToFit = (function makeResizeToFit() {
      */
     function interpolateOptimalFontSize(element, selector, currentFontSize) {
         const elementClientW = element.clientWidth;
-        let fontSize = null;
-        if (resizedSelectors.has(selector)) {
-            fontSize = currentFontSize;
-        } else {
-            fontSize = element.originalFontSize;
-        }
+        let fontSize = (resizedSelectors.has(selector))
+            ? currentFontSize
+            : element.originalFontSize;
         cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
         if (element.scrollWidth > elementClientW) {
-            while (element.scrollWidth > elementClientW) {
-                fontSize -= 1;
+            let searching = true;
+            let searchDirection = (-1);
+            let step = Math.ceil(fontSize / 2) * searchDirection;
+            while (searching) {
+                fontSize += step;
                 cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
+                if (element.scrollWidth > elementClientW) {
+                    searchDirection = (-1);
+                } else {
+                    if (step === (-1)) {
+                        searching = false;
+                    }
+                    searchDirection = 1;
+                }
+                step = Math.ceil(Math.abs(step) / 2) * searchDirection;
             }
             resizedSelectors.add(selector);
         }
@@ -103,9 +112,9 @@ window.resizeToFit = (function makeResizeToFit() {
         if (!element.originalFontSize) {
             element.originalFontSize = elementCurrentFontSize;
         }
-        cssHandler.setProp(selector, ["overflow: hidden"]);
+        cssHandler.setProp(selector, ["overflow: hidden", "display: block"]);
         interpolateOptimalFontSize(element, selector, elementCurrentFontSize);
-        cssHandler.deleteProp(selector, ["overflow"]);
+        cssHandler.deleteProp(selector, ["overflow", "display"]);
     }
 
     let debounceID = null;
@@ -116,9 +125,10 @@ window.resizeToFit = (function makeResizeToFit() {
      * @param {number} debounce - Waits this amount of ms to resize content.
      */
     function resize(debounce) {
-        if (debounce === undefined) {
+        if (typeof debounce === "undefined") {
             debounce = 200;
         }
+
         /**
          * Actual resizing
          */
