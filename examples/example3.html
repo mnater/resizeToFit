@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>example3</title>
+        <script src="../resizeToFit.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                resizeToFit.init([
+                    //"th",
+                    //"td"
+                ]);
+            });
+
+            window.addEventListener("resize", function () {
+                resizeToFit.resize(100);
+            });
+
+        </script>
+        <style type="text/css">
+            table {
+                table-layout: fixed;
+                width: 66%;
+                margin: 0 auto;
+            }
+            thead {
+                background-color: pink;
+            }
+            @media screen and (max-width: 600px) {
+                table {
+                    width: 100%
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>22&nbsp;Buchstaben</th>
+                    <th>23&nbsp;Buchstaben</th>
+                    <th>24&nbsp;Buchstaben</th>
+                    <th>30&nbsp;Buchstaben</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>Lebensabschnittpartner</td>
+                        <td>Haftpflichtversicherung</td>
+                        <td>Unabhängigkeitserklärung</td>
+                        <td>Ernährungswissenschaftlerinnen</td>
+                    </tr>
+                    <tr>
+                       <td>Freundschaftsbezeugung</td>
+                       <td>Gebrauchtwagenabteilung</td>
+                       <td>Ausdehnungskoeffizienten</td>
+                       <td>wahrscheinlichkeitstheoretisch</td>
+                    </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

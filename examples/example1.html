@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>example1</title>
+        <script src="../resizeToFit.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                resizeToFit.init([
+                    "h1"
+                ]);
+            });
+
+            window.addEventListener("resize", function () {
+                resizeToFit.resize(100);
+            });
+
+        </script>
+        <style type="text/css">
+            h1 {
+                font-size: 100px;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Wortflüstereien</h1>
+    </body>
+</html>

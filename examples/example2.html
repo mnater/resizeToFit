@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>example1</title>
+        <script src="../resizeToFit.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                resizeToFit.init([
+                    //"th"
+                ]);
+            });
+
+            window.addEventListener("resize", function () {
+                resizeToFit.resize(100);
+            });
+
+        </script>
+        <style type="text/css">
+            table {
+                table-layout: fixed;
+                width: 66%;
+                margin: 0 auto;
+            }
+            thead {
+                background-color: pink;
+                font-size: 4vw;
+            }
+            @media screen and (max-width: 600px) {
+                table {
+                    width: 100%
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>erster Spaltentitel</th>
+                    <th>zweiter Spaltentitel</th>
+                    <th>dritter Spaltentitel</th>
+                    <th>vierter Spaltentitel</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>erster Zellentext</td>
+                        <td>zweiter Zellentext</td>
+                        <td>dritter Zellentext</td>
+                        <td>vierter Zellentext</td>
+                    </tr>
+                    <tr>
+                       <td>fünfter Zellentext</td>
+                       <td>sechster Zellentext</td>
+                       <td>siebter Zellentext</td>
+                       <td>achter Zellentext</td>
+                    </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
