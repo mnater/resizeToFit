@@ -100,10 +100,8 @@ window.resizeToFit = (function makeResizeToFit() {
          * but don't grow bigger than originalFontSize or currentFontSize
          */
         const fontSize = Math.min(
-            Math.min(
-                el.clientWidth / el.scrollWidth * el.originalFontSize,
-                el.originalFontSize
-            ),
+            el.clientWidth / el.scrollWidth * el.originalFontSize,
+            el.originalFontSize,
             currentFontSize
         );
 
