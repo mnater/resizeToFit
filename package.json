@@ -1,6 +1,6 @@
 {
   "name": "resizetofit",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "JavaScript that resizes font-size until text fits to its container",
   "main": "resizeToFit.js",
   "scripts": {
@@ -29,7 +29,7 @@
       "es6": true
     },
     "globals": {
-      "Hyphenopoly": "readable"
+      "resizeToFit": "readable"
     },
     "plugins": [
       "security"

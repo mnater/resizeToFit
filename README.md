@@ -36,39 +36,53 @@ You have this table of ridiculous long german words. Again, they overflow the ta
 ## How does it solve the problem?
 With `resizeToFit` you'll don't have to find a magic number for `vw` or fiddle the font-size of your table content. `resizeToFit` scans your document for the selectors you provide and resizes text until it fits it's container.
 
-While resizing it constantly compares the `scrollWidth` of the elements with their `clientWidth` until `scrollWidth <= clientWidth` (repetedly getting `scrollWidth` is a big performance-issue, more on this later). Unlike other tools like [FitText](http://fittextjs.com) or [Fitty](https://rikschennink.github.io/fitty/), `resizeToFit` doesn't add `style="font-size: XYpx;"` to each element but rather manages the font-sizes in a site-wide stylesheet. This ensures that elements with the same selector will have the same font-size (wich is great ;-).
+Unlike other tools like [FitText](http://fittextjs.com) or [Fitty](https://rikschennink.github.io/fitty/), `resizeToFit` doesn't add `style="font-size: XYpx;"` to each element but rather manages the font-sizes in a site-wide stylesheet. This ensures that elements with the same selector will have the same font-size (wich is great ;-).
 
 ## Installation and usage
 ````html
-<script src="../resizeToFit.js"></script>
-<script>
-    window.addEventListener("load", function () {
-        resizeToFit.init([
-            "h1" //look for <h1> elements
-        ]);
-    });
-</script>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>example</title>
+        <script src="../resizeToFit.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                resizeToFit.init([
+                    "h1"
+                ]);
+            });
+
+            window.addEventListener("resize", function () {
+                resizeToFit.resize();
+            });
+
+        </script>
+        <style type="text/css">
+            h1 {
+                font-size: 16vw;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Wortflüstereien</h1>
+    </body>
+</html>
 ````
 
 `resizeToFit.init()` takes an array of CSS-selectors as input parameter and then automatically resizes the content of the selected elements.
-
-There are some caveats:
-*   Make sure to use the selector with the highest specifity (otherwise your CSS may overwrite the settings from resizeToFit).
-*   Resizing is very performance intensive (it forces a layout on every iteration). This is regarded as bad practice and I'm looking for a better solution. Make sure to start with an "almost perfect" font-size to keep the performance costs on a acceptable level.
 
 ## Listen to resizing
 If the viewport-width changes font-sizes need to be recalculatet. Thus you can listen to `resize-events` and call `resizeToFit.resize()` when the event is fired:
 
 ````javascript
 window.addEventListener("resize", function () {
-    resizeToFit.resize(); // debounces 200ms
+    resizeToFit.resize();
 });
 ````
 
-This works great when mobile devices are rotated. But if a desktop window is resized, the event fires multiple times and needs [debouncing](http://unscriptable.com/2009/03/20/debouncing-javascript-methods/). `resizeToFit.resize()` therefor takes an amount of Milliseconds as parameter to wait for other `resize`-events to happen until `resize()` is actually executed. If no parameter is handed over, it resolves to a default of `200ms`. Experiment what value fits your needs.
-
-````javascript
-window.addEventListener("resize", function () {
-    resizeToFit.resize(50);
-});
-````
+## Caveats
+*   Make sure to use the selector with the highest specifity (otherwise your CSS may overwrite the settings from resizeToFit).
+*   `resizeToFit.js` isn't tested very well, yet. Please [report any issues](https://github.com/mnater/resizeToFit/issues).

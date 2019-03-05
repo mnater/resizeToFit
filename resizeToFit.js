@@ -1,8 +1,17 @@
+/**
+ * @license resizeToFit 0.2.0-devel - Resize text until it fits to its container.
+ * ©2019  Mathias Nater, Zürich (mathiasnater at gmail dot com)
+ * https://github.com/mnater/resizeToFit
+ *
+ * Released under the MIT license
+ * http://mnater.github.io/resizeToFit/LICENSE
+ */
+
 window.resizeToFit = (function makeResizeToFit() {
     "use strict";
     const charges = [];
     let cssHandler = null;
-    const resizedSelectors = new Set();
+    const resizedSelectors = new Map();
 
     /**
      * Factory for a CSS handling object
@@ -62,88 +71,40 @@ window.resizeToFit = (function makeResizeToFit() {
     }
 
     /**
-     * Reduce font-size until the elements scrollWidth is equal or smaller
-     * than the elements client width.
-     * Getting element.scrollWidth forces a layout. This is really bad
-     * for performance.
-     * @param {DOMElement} element - An element whose font-size needs to be resized
-     * @param {string} selector - The selector that found that element.
-     * @param {number} currentFontSize - The current fontsize of the element
-     */
-    function interpolateOptimalFontSize(element, selector, currentFontSize) {
-        const elementClientW = element.clientWidth;
-        let fontSize = (resizedSelectors.has(selector))
-            ? currentFontSize
-            : element.originalFontSize;
-        cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
-        if (element.scrollWidth > elementClientW) {
-            let searching = true;
-            let searchDirection = (-1);
-            let step = Math.ceil(fontSize / 2) * searchDirection;
-            while (searching) {
-                fontSize += step;
-                cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
-                if (element.scrollWidth > elementClientW) {
-                    searchDirection = (-1);
-                } else {
-                    if (step === (-1)) {
-                        searching = false;
-                    }
-                    searchDirection = 1;
-                }
-                step = Math.ceil(Math.abs(step) / 2) * searchDirection;
-            }
-            resizedSelectors.add(selector);
-        }
-    }
-
-    /**
-     * Prepare element for resizing.
-     * @param {array} charge - An array of element and selector
+     * Resize font-size of the element
+     * @param {DOMElement} el - The element whose text is to be resized
+     * @param {string} selector - The selector that found this element
      * @returns {undefined}
      */
-    function resizeContent(element, selector) {
-        // The unit is always "px" for computed values
-        const computedStyles = window.getComputedStyle(element);
-        const elementCurrentFontSize = parseInt(
-            computedStyles.fontSize.slice(0, -2),
-            10
+    function resizeContent(el, selector) {
+        const currentFontSize = resizedSelectors.has(selector)
+            ? resizedSelectors.get(selector)
+            : el.originalFontSize;
+        cssHandler.setProp(
+            selector,
+            ["overflow: hidden", "display: block", "font-size: " + el.originalFontSize + "px"]
         );
-        if (!element.originalFontSize) {
-            element.originalFontSize = elementCurrentFontSize;
-        }
-        cssHandler.setProp(selector, ["overflow: hidden", "display: block"]);
-        interpolateOptimalFontSize(element, selector, elementCurrentFontSize);
+        const fontSize = Math.min(
+            Math.min(
+                el.clientWidth / el.scrollWidth * el.originalFontSize,
+                el.originalFontSize
+            ),
+            currentFontSize
+        );
+        resizedSelectors.set(selector, fontSize);
+        cssHandler.setProp(selector, ["font-size: " + fontSize + "px"]);
         cssHandler.deleteProp(selector, ["overflow", "display"]);
     }
 
-    let debounceID = null;
-
     /**
      * Resize each element.
-     * The execution is debounced by a given amount of ms.
-     * @param {number} debounce - Waits this amount of ms to resize content.
+     * @returns {undefined}
      */
-    function resize(debounce) {
-        if (typeof debounce === "undefined") {
-            debounce = 200;
-        }
-
-        /**
-         * Actual resizing
-         */
-        function doResizing() {
-            resizedSelectors.clear();
-            charges.forEach(function eachCharge(charge) {
-                resizeContent(charge[0], charge[1]);
-            });
-        }
-        if (debounce > 0) {
-            window.clearTimeout(debounceID);
-            debounceID = window.setTimeout(doResizing, debounce);
-        } else {
-            doResizing();
-        }
+    function resize() {
+        resizedSelectors.clear();
+        charges.forEach(function eachCharge(charge) {
+            resizeContent(charge[0], charge[1]);
+        });
     }
 
     /**
@@ -160,10 +121,17 @@ window.resizeToFit = (function makeResizeToFit() {
         selectors.forEach(function eachSelector(selector) {
             const nodeList = document.querySelectorAll(selector);
             nodeList.forEach(function eachElement(element) {
+                const computedStyles = window.getComputedStyle(element);
+                const elementCurrentFontSize = parseFloat(
+                    computedStyles.fontSize
+                );
+                if (!element.originalFontSize) {
+                    element.originalFontSize = elementCurrentFontSize;
+                }
                 charges.push([element, selector]);
             });
         });
-        resize(0);
+        resize();
     }
 
     return {
