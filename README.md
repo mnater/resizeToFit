@@ -34,7 +34,7 @@ __Example3:__
 You have this table of ridiculous long german words. Again, they overflow the table-cells on small screens. OK, you could use `hyphens: auto` to enable hyphenation, but then the long words won't look so long anymore…
 
 ## How does it solve the problem?
-With `resizeToFit` you'll don't have to find a magic number for `vw` or fiddle the font-size of your table content. `resizeToFit` scans your document for the selectors you provide and resizes text until it fits it's container.
+With `resizeToFit` you'll don't have to find a magic number for `vw` or to fiddle about the font-size of your table content. `resizeToFit` scans your document for the selectors you provide and resizes text until it fits it's container.
 
 Unlike other tools like [FitText](http://fittextjs.com) or [Fitty](https://rikschennink.github.io/fitty/), `resizeToFit` doesn't add `style="font-size: XYpx;"` to each element but rather manages the font-sizes in a site-wide stylesheet. This ensures that elements with the same selector will have the same font-size (wich is great ;-).
 
