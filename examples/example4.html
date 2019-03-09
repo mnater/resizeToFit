@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>example4</title>
+        <script src="../resizeToFit.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                resizeToFit.init([
+                    "h1"
+                ]);
+            });
+
+            window.addEventListener("resize", function () {
+                resizeToFit.resize();
+            });
+        </script>
+        <style type="text/css">
+            body {
+                font-size : 8vw;
+            }
+            h1 {
+                display: flex;
+                align-items: center;
+                padding-left: 30px;
+                padding-right: 30px;
+                background: #2c8cc8;
+                border-radius: 60px;
+                color: white;
+                letter-spacing: 0.03em;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 id="test">Donaudampfschifffahrt</h1>
+        <code>
+        <script>
+            const el = document.getElementById("test");
+            document.writeln("scrollWidth: " + el.scrollWidth);
+            document.writeln("clientWidth: " + el.clientWidth);
+            document.writeln("fontSize: " + window.getComputedStyle(el).fontSize);
+        </script>
+        </code>
+    </body>
+</html>

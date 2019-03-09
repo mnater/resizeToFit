@@ -1,0 +1,392 @@
+<!DOCTYPE HTML>
+<html lang="de">
+    <head>
+        <title>Example2: resize h1 and h2, table</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+        <style>
+            * {
+                margin : 0;
+                padding : 0;
+            }
+
+            html {
+                margin : 0;
+                padding : 0;
+                height : 100%;
+                width : 100%;
+            }
+
+            body {
+                margin : 0;
+                padding : 0;
+                border : 0;
+                width : 100%;
+                min-height : 100%;
+                position: relative;
+                background : #f7f4f1;
+                font-family : Rubik, sans-serif;
+                font-weight : 300;
+                font-size : 1.1rem;
+                letter-spacing : 0.02rem;
+                color : black;
+            }
+
+            .wrapper {
+                position : relative;
+                min-height : 100%;
+                flex-grow : 1;
+                flex-shrink : 1;
+                flex-basis : auto;
+            }
+
+            section {
+                position : relative;
+                margin : 100px auto 100px auto;
+                padding : 0 5%;
+                width : 700px;
+                max-width : 90%;
+            }
+
+            section h1 {
+                margin-bottom : 2rem;
+                font-size : 3rem;
+                font-weight : 500;
+                text-align : left;
+                color : #333;
+            }
+
+            section h1:after {
+                content : "";
+                visibility : hidden;
+                display : block;
+                font-size : 0;
+                clear : both;
+                height : 0;
+            }
+
+            section h2 {
+                font-size : 1.5rem;
+                padding-top : 2rem;
+                padding-bottom : 0.6rem;
+            }
+
+            section h4 {
+                padding-top : 1rem;
+                font-weight : 500;
+            }
+
+            section p {
+                padding : 0.3em 0;
+                line-height : 1.35;
+            }
+
+
+            section ul {
+                padding : 0.3em 0;
+            }
+
+            section ul {
+                margin-left : 10px;
+                list-style-type : none;
+            }
+
+            section ul li {
+                padding : 0.3em 0;
+                list-style-type : none;
+            }
+
+            section li::before {
+                content : '· ';
+                margin-left : -10px;
+            }
+
+            em {
+                display : inline-block;
+                margin-bottom : 25px;
+                font-family : BPmono, "Trebuchet MS", serif;
+                font-size : 1.4rem;
+                color : #20638e;
+                letter-spacing : -0.01rem;
+            }
+
+            .drop-down {
+                position : relative;
+                margin : 25px auto;
+            }
+
+            .drop-down h2 {
+                display : flex;
+                align-items : center;
+                margin : 20px 66px 20px 0;
+                padding : 0 25px 0 25px;
+                height : 60px;
+                background : #2c8cc8;
+                border-radius : 60px;
+                text-transform : uppercase;
+                color : white;
+                font-size : 20px;
+                letter-spacing : 0.1em;
+                vertical-align : middle;
+                cursor : pointer;
+            }
+
+            .drop-down h2:before {
+                content : '';
+                display : block;
+                position : absolute;
+                right : 0;
+                width : 60px;
+                height : 60px;
+                background : white;
+                border-radius : 100px;
+                box-shadow : 0 0 15px rgba(0,0,0,.1);
+            }
+
+            .drop-down h2:after {
+                content : '\25BC';
+                display : block;
+                position : absolute;
+                top : 4px;
+                right : 0;
+                width : 60px;
+                line-height : 60px;
+                text-align : center;
+                color : #2c8cc8;
+                font-size : 22px;
+                z-index : 2;
+                -webkit-transform:scale(1.6,1);
+                   -moz-transform:scale(1.6,1);
+                    -ms-transform:scale(1.6,1);
+                     -o-transform:scale(1.6,1);
+                        transform:scale(1.6,1);
+                -webkit-transition : all 0.3s ease;
+                   -moz-transition : all 0.3s ease;
+                     -o-transition : all 0.3s ease;
+                        transition : all 0.3s ease;
+            }
+
+            .drop-down article {
+                /*display : none;*/
+                margin-top : 25px;
+                margin-bottom : 100px;
+            }
+
+            .kennenlernpaket table th, td {
+                border : 3px solid #f7f4f1;
+                width : 50%;
+            }
+
+            #finden table {
+                width : 100%;
+                margin : 25px 0;
+                border-radius : 100px;
+                border-collapse : collapse;
+                border-spacing : 0;
+                overflow : hidden;
+            }
+
+            #finden table thead th {
+                position : relative;
+                padding : 50px 0;
+                color : white;
+                background : #2c8cc8;
+                text-transform : uppercase;
+                letter-spacing : 0.1rem;
+                text-align : center;
+            }
+
+            #finden table thead th strong {
+                display : block;
+                position : absolute;
+                bottom : 0;
+                left : 50%;
+                transform : translate(-50%, 50%);
+                width : 70px;
+                height : 70px;
+                line-height : 70px;
+                background : #f7f4f1;
+                color : #2c8cc8;
+                font-weight : 600;
+                font-size : 2.5rem;
+                border-radius : 500px;
+            }
+
+            #finden table tbody td {
+                padding : 70px 15px 10px 15px;
+                background : white;
+            }
+
+            #finden table tbody td > div {
+                display : table;
+            }
+
+            #finden table tbody td > div > ul, #finden table tbody td > div > div {
+                display : table-cell;
+                padding : 0 20px;
+                width : 50%;
+            }
+
+            #finden table tbody td > div > div > ul {
+                display : block;
+            }
+
+            #finden table th, #finden table td {
+                border : 0;
+                width : 33.333%;
+            }
+
+            #finden table tfoot td {
+                padding : 30px 0 70px 0;
+                text-align : center;
+                background : white;
+            }
+
+            #finden table tfoot td strong {
+                display : block;
+                margin-top : 10px;
+                color : #2c8cc8;
+                font-weight : 500;
+                font-size : 1.8rem;
+                letter-spacing : 0.1rem;
+            }
+
+            #finden table tfoot td strong small {
+                display : block;
+                font-size : 0.6em;
+                font-weight : 600;
+            }
+
+            #finden table thead th:nth-child(1) {
+                background : #6fbef6;
+            }
+
+            #finden table thead th:nth-child(1)  strong, #finden table tfoot td:nth-child(1) strong {
+                color : #6fbef6;
+            }
+
+            #finden table thead th:nth-child(3) {
+                background : #20638e;
+            }
+
+            #finden table thead th:nth-child(3)  strong, #finden table tfoot td:nth-child(3) strong {
+                color : #20638e;
+            }
+        </style>
+        <script src="../resizeToFit.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+                resizeToFit.init([
+                    "section h1",
+                    ".drop-down h2",
+                    "th"
+                ]);
+            });
+
+            window.addEventListener("resize", function () {
+                resizeToFit.resize();
+            });
+        </script>
+    </head>
+
+
+
+<body id="finden">
+    <div class="wrapper">
+        <section>
+            <h1><span style="font-size:40px">The first h1-title</span></h1>
+            <p><em>Lorem ipsum dolor sit amet consectetur adipisicing elit.</em></p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore unde nisi sint ipsum commodi incidunt porro eius neque quam sit velit, ea non reprehenderit autem, sequi soluta ducimus? Similique, nihil.</p>
+        </section>
+        <section>
+            <h1>The second h1-title</h1>
+            <p><em>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</em></p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea animi, explicabo similique inventore dicta a, velit, ducimus neque blanditiis aliquam voluptatem fugit dignissimos aspernatur? Eveniet suscipit iure ut atque alias.</p>
+            <div class="drop-down" name="basispaket">
+                <h2>Lehrlingsmarketing-Basispaket</h2>
+                <article>
+                    <p><em>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</em></p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus cum animi inventore, natus praesentium culpa facilis nemo pariatur perspiciatis exercitationem rem error ducimus ipsum, debitis, repudiandae iure saepe sint labore?</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <strong>S</strong>
+                                    <p>table&shy;hea&shy;der 1<br />plus special1</p>
+                                </th>
+                                <th>
+                                    <strong>M</strong>
+                                    <p>2 to 3 spe&shy;cia&shy;li&shy;ties<br />&nbsp;</p>
+                                </th>
+                                <th>
+                                    <strong>L</strong>
+                                    <p>3 bis 4 spe&shy;cia&shy;li&shy;ties<br />&nbsp;</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="3">
+                                    <div>
+                                        <div>
+                                            <h4>Lorem ipsum dolor sit amet consectetur.</h4>
+                                            <ul>
+                                                <li>Lorem ipsum dolor sit amet consectetur, adipisicing</li>
+                                                <li>Minus cum animi inventore, natus</li>
+                                                <li>Lorem ipsum dolor sit</li>
+                                                <li>exercitationemis</li>
+                                                <li>andae iure saepe sint labore</li>
+                                            </ul>
+                                            <h4>Lorem ipsum dolor sit amet con</h4>
+                                            <h4>sectetur, adipisicin</h4>
+                                            <ul>
+                                                <li>Minus cum animi inventore, natus praesentium culpa facilis nemo pariatur perspiciatis exercita</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                               <h4>Lorem ipsum dolor sit amet consectetur.</h4>
+                                               <ul>
+                                                   <li>Lorem ipsum dolor sit amet consectetur, adipisicing</li>
+                                                   <li>Minus cum animi inventore, natus</li>
+                                                   <li>Lorem ipsum dolor sit</li>
+                                                   <li>exercitationemis</li>
+                                                   <li>andae iure saepe sint labore</li>
+                                               </ul>
+                                               <h4>Lorem ipsum dolor sit amet con</h4>
+                                               <h4>sectetur, adipisicin</h4>
+                                               <ul>
+                                                   <li>Minus cum animi inventore, natus praesentium culpa acilis nemo pariatur perspiciatis exercita</li>
+                                               </ul>
+                                           </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+                                    <p>2 Seiten Text<br/>(300 Worte)</p>
+                                    <p>5 Fotos</p>
+                                    <strong><small>CHF</small>A'BCD.–</strong>
+                                </td>
+                                <td>
+                                    <p>4 Seiten Text<br/>(500 Worte)</p>
+                                    <p>8 Fotos</p>
+                                    <strong><small>CHF</small>AB'CDE.–</strong>
+                                </td>
+                                <td>
+                                    <p>6 Seiten Text<br/>(700 Worte)</p>
+                                    <p>12 Fotos</p>
+                                    <strong><small>CHF</small>AB'CDE.–</strong>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </article>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

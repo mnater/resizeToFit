@@ -74,6 +74,10 @@ Unlike other tools like [FitText](http://fittextjs.com) or [Fitty](https://riksc
 
 `resizeToFit.init()` takes an array of CSS-selectors as input parameter and then automatically resizes the content of the selected elements.
 
+It is very important to carefully choose the selectors. `resizeToFit` calculates the sizes per selector, thus all elements with the same selector will be resized to the same size (the smallest font-size necessary to fit all elements with this selector to their container). Therefor, if there are different elements (with different sizes) you'll need different selectors.
+
+Also make sure to use the selector with the highest specifity (otherwise your CSS may overwrite the settings from resizeToFit).
+
 ## Listen to resizing
 If the viewport-width changes font-sizes need to be recalculatet. Thus you can listen to `resize-events` and call `resizeToFit.resize()` when the event is fired:
 
@@ -84,5 +88,4 @@ window.addEventListener("resize", function () {
 ````
 
 ## Caveats
-*   Make sure to use the selector with the highest specifity (otherwise your CSS may overwrite the settings from resizeToFit).
-*   `resizeToFit.js` isn't tested very well, yet. Please [report any issues](https://github.com/mnater/resizeToFit/issues).
+*   `resizeToFit.js` isn't tested very well, yet. The font-sizes are calculated using `clientWidth` and `scrollWidth` which, depending on other CSS-properties (e.g. `padding`), may not behave the same on different browsers. Please [report any issues](https://github.com/mnater/resizeToFit/issues).
